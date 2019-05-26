@@ -50,6 +50,10 @@ class ValidatorTest extends TestCase
             'SE123456789012',
             'SI12345678',
             'SK1234567890',
+            'CH123456',
+            'CHE123456789TVA',
+            'CHE123456789',
+            'NO123456789'
         ];
 
         $validator = new Validator();
@@ -89,6 +93,8 @@ class ValidatorTest extends TestCase
             'SI1234567',
             'SK123456789',
             'fooGB999999973', // valid VAT number but with string prefix
+            'NO123',
+            'CH123456789'
         ];
 
         foreach( $invalid as $format ) {
