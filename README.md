@@ -1,11 +1,5 @@
-ibericode/vat
+Fork of ibericode/vat - with ability to provide custom Patterns library
 ================
-
-[![Build Status](https://img.shields.io/travis/ibericode/vat.svg)](https://travis-ci.org/ibericode/vat)
-[![Latest Stable Version](https://img.shields.io/packagist/v/ibericode/vat.svg)](https://packagist.org/packages/ibericode/vat)
-![PHP from Packagist](https://img.shields.io/packagist/php-v/ibericode/vat.svg)
-[![Total Downloads](https://img.shields.io/packagist/dt/dannyvankooten/vat.php.svg)](https://packagist.org/packages/ibericode/vat)
-![License](https://img.shields.io/github/license/ibericode/vat.svg)
 
 This is a simple PHP library to help you deal with Europe's VAT rules. 
 
@@ -47,7 +41,18 @@ This fetches rate from [ibericode/vat-rates](https://github.com/ibericode/vat-ra
 
 Validating a VAT number:
 ```php
+// init with default Patterns
 $validator = new Ibericode\Vat\Validator();
+$validator->validateVatNumberFormat('NL203458239B01'); // true (checks format)
+$validator->validateVatNumber('NL203458239B01'); // false (checks format + existence)
+```
+
+```php
+$patterns = new Ibericode\Vat\Patterns();
+// add custom country validation code
+$patterns->setPattern('CH', '(E\d{9}(TVA|MWST|IVA)?|^\d{6})');
+// pass $patterns to Validator
+$validator = new Ibericode\Vat\Validator($patterns);
 $validator->validateVatNumberFormat('NL203458239B01'); // true (checks format)
 $validator->validateVatNumber('NL203458239B01'); // false (checks format + existence)
 ```
