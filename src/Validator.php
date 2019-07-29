@@ -73,6 +73,16 @@ class Validator
         $country = substr($vatNumber, 0, 2);
         $number = substr($vatNumber, 2);
 
+        // Country needs to be 2 letters ISO code
+        if(strlen($country) !== 2){
+            return false;
+        }
+
+        // 2nd part of VAT ID needs to be at least 1 char long
+        if($number == false){
+            return false;
+        }
+
         $matches = $this->patterns->matches($country, $number);
 
         return $matches;
